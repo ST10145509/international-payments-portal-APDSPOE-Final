@@ -17,6 +17,7 @@ import { AuthService } from '../services/auth.service';
             <mat-form-field appearance="outline">
               <mat-label>Account Number</mat-label>
               <input matInput formControlName="accountNumber" type="text">
+              <mat-icon matPrefix>account_circle</mat-icon>
               <mat-error *ngIf="f['accountNumber'].errors?.['required']">
                 Account number is required
               </mat-error>
@@ -27,22 +28,25 @@ import { AuthService } from '../services/auth.service';
 
             <mat-form-field appearance="outline">
               <mat-label>Password</mat-label>
-              <input matInput formControlName="password" type="password">
+              <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password">
+              <mat-icon matPrefix>lock</mat-icon>
+              <mat-icon matSuffix (click)="hidePassword = !hidePassword">
+                {{hidePassword ? 'visibility_off' : 'visibility'}}
+              </mat-icon>
               <mat-error *ngIf="f['password'].errors?.['required']">
                 Password is required
               </mat-error>
             </mat-form-field>
 
-            <button mat-raised-button color="primary" [disabled]="loading">
-              <mat-spinner diameter="20" *ngIf="loading"></mat-spinner>
-              Login
-            </button>
-
-            <div *ngIf="error" class="alert alert-danger mt-3">{{error}}</div>
-
-            <div class="register-link">
-              New user? <a routerLink="/auth/register">Sign up now</a>
+            <div class="form-actions">
+              <button mat-raised-button color="primary" [disabled]="loginForm.invalid || loading">
+                <mat-spinner diameter="20" *ngIf="loading"></mat-spinner>
+                <span>Login</span>
+              </button>
+              <a mat-button routerLink="/auth/register">Need an account? Register</a>
             </div>
+
+            <div *ngIf="error" class="error-message">{{error}}</div>
           </form>
         </mat-card-content>
       </mat-card>
@@ -53,22 +57,63 @@ import { AuthService } from '../services/auth.service';
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      min-height: 100vh;
+      padding: 20px;
       background-color: #f5f5f5;
     }
+
     mat-card {
       max-width: 400px;
-      width: 90%;
-      padding: 20px;
+      width: 100%;
+      margin: 20px;
     }
+
+    mat-card-header {
+      margin-bottom: 20px;
+    }
+
     form {
       display: flex;
       flex-direction: column;
-      gap: 1rem;
+      gap: 16px;
     }
-    .register-link {
+
+    mat-form-field {
+      width: 100%;
+    }
+
+    .form-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      align-items: center;
+      margin-top: 16px;
+    }
+
+    .form-actions button {
+      width: 200px;
+      height: 40px;
+    }
+
+    .form-actions a {
+      color: #666;
+    }
+
+    .error-message {
       text-align: center;
-      margin-top: 1rem;
+      color: #f44336;
+      margin-top: 16px;
+    }
+
+    mat-spinner {
+      display: inline-block;
+      margin-right: 8px;
+    }
+
+    button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   `]
 })
@@ -77,6 +122,7 @@ export class LoginComponent implements OnInit {
   loading = false;
   error = '';
   returnUrl!: string;
+  hidePassword = true;
 
   constructor(
     private formBuilder: FormBuilder,

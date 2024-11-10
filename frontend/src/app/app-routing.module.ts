@@ -5,8 +5,10 @@ import { EmployeeGuard } from './auth/guards/employee.guard';
 import { CustomerDashboardComponent } from './customer/dashboard/dashboard.component';
 import { EmployeeDashboardComponent } from './employee/dashboard/dashboard.component';
 import { RoleGuard } from './guards/role.guard';
+import { WelcomeComponent } from './welcome/welcome.component';
 
 const routes: Routes = [
+  { path: 'welcome', component: WelcomeComponent },
   { 
     path: 'auth',
     loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
@@ -23,8 +25,8 @@ const routes: Routes = [
     canActivate: [RoleGuard],
     data: { role: 'employee' }
   },
-  { path: '', redirectTo: '/auth/login', pathMatch: 'full' },
-  { path: '**', redirectTo: '/auth/login' }
+  { path: '', redirectTo: '/welcome', pathMatch: 'full' },
+  { path: '**', redirectTo: '/welcome' }
 ];
 
 @NgModule({

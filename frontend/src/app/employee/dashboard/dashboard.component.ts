@@ -75,6 +75,6 @@ export class EmployeeDashboardComponent implements OnInit {
 
   logout() {
     this.authService.logout();
-    this.router.navigate(['/auth/login']);
+    this.router.navigate(['/welcome']);
   }
 } 
