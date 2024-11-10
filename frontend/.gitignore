@@ -1,0 +1,41 @@
+# Dependencies
+/node_modules
+
+# Compiled output
+/dist
+/.angular/cache
+/out-tsc
+/bazel-out
+
+# Environment files
+/src/environments/*.ts
+!/src/environments/environment.template.ts
+
+# SSL certificates
+/ssl/*.pem
+/ssl/*.key
+/ssl/*.crt
+
+# IDE files
+/.idea
+/.project
+/.classpath
+/.c9/
+*.launch
+/.settings/
+*.sublime-workspace
+/.vscode
+
+# Misc
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
+npm-debug.log
+yarn-error.log
+testem.log
+/typings
+
+# System Files
+.DS_Store
+Thumbs.db 

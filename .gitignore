@@ -1,0 +1,34 @@
+# Dependencies
+/node_modules
+
+# Compiled output
+/dist
+/.angular/cache
+/out-tsc
+/bazel-out
+
+# Environment files
+/src/environments/*.ts
+!/src/environments/environment.template.ts
+
+# SSL certificates
+/ssl/*.pem
+/ssl/*.key
+/ssl/*.crt
+
+# IDE files
+.idea/
+.vscode/
+*.sublime-*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Environment files
+.env
+.env.*
+!.env.template
