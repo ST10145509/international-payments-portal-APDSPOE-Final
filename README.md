@@ -28,7 +28,7 @@
    ```powershell
    npm run seed:employees
    ```
-   This will create test employee accounts with the following credentials:
+   This will create 5 employee accounts with one that has the following credentials, given to test the portal:
    - Email: john.smith@bank.com
    - Password: Employee123!
 
